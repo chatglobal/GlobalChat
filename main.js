@@ -4,7 +4,7 @@ export default round;
 document.getElementById("sendButton").addEventListener("click", function(){
     const messageBox = document.getElementById("messageBox")
     if (messageBox.value != ""){
-        let post = new Post("TestPoster", "Rebuild!.png", messageBox.value, 0)
+        let post = new Post("TestPoster", null, messageBox.value, 0)
         post.post()
         messageBox.value = ""
     }
