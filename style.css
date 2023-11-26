@@ -1,0 +1,92 @@
+.post{
+    display: flex;
+    float: left;
+    align-items: center;
+    max-height: 500px;
+    min-width: 50%;
+    max-width: 100%;
+    padding-left: 5px;
+}
+
+.profilePicture{
+   float: left;
+   height: 50px;
+   width: 50px;
+   border-radius: 100%;
+}
+
+.content{
+    min-height: 15%;
+    max-width: 75%;
+    align-items: center;
+}
+
+.userName{
+    height: 4px;
+    width: 60%;
+    margin-left: 12px;
+    color: gray;
+}
+
+.likes{
+    display: flex;
+    align-items: center;
+    height: 50px;
+    max-width: 10%;
+    margin-top: 17.5px;
+    margin-left: 10px;
+}
+
+.likeHeart{
+    height: fit-content;
+}
+
+.likeCounter{
+    margin-left: 5px;
+}
+
+.message{
+    display: flex;
+    align-items: center;
+    min-height: 30px;
+    min-width: 70%;
+    max-width: 100%;
+    margin-left: 10px;
+    padding: 4px;
+    background-color: lightblue;
+    border-radius: 10px;
+}
+
+.messages{
+    overflow: auto;
+    height: 75%;
+    min-width: 25%;
+    max-width: 75%;
+    border: black solid 3px;
+}
+
+.messageArea{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 50px;
+    width: 75%;
+    margin-top: 5px;
+}
+
+.messageBox{
+    height: 80%;
+    width: 85%;
+    background-color: transparent;
+    border-radius: 10px;
+    border: black solid 3px;
+}
+
+.sendButton{
+    height: 80%;
+    width: 10%;
+    margin-left: 1%;
+    border-radius: 20px;
+    border: black solid 3px;
+    background-color:dodgerblue;
+}
