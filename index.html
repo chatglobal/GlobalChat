@@ -13,9 +13,11 @@
 <body>
     <h1>Chat Room</h1>
     <div class="messages" id="messages"></div>
-    <div class="messageArea" id="send">
-        <input class="messageBox" id="messageBox" type="text" placeholder="Type your message here..." id="messageBox">
+    <div class="textArea" id="send">
+        <input class="textBox" id="messageBox" type="text" placeholder="Type your message here..." id="messageBox" maxlength="1000">
+        <p class="limit" id="limit">0/1000</p>
         <button type="button" class="sendButton" id="sendButton"><i class="material-icons" style="color: white; font-size: large;">send</i></button>
     </div>
+
 </body>
 </html>

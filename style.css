@@ -16,6 +16,8 @@
    float: left;
    height: 50px;
    width: 50px;
+   font-size: large;
+   justify-content: center;
    border-radius: 100%;
 }
 
@@ -36,6 +38,7 @@
 .message{
     display: flex;
     align-items: center;
+    word-break: break-all;
     min-height: 30px;
     min-width: 70%;
     max-width: 100%;
@@ -71,7 +74,7 @@
     border: black solid 3px;
 }
 
-.messageArea{
+.textArea{
     display: flex;
     justify-content: center;
     align-items: center;
@@ -80,19 +83,28 @@
     margin-top: 5px;
 }
 
-.messageBox{
+.textBox{
     height: 80%;
-    width: 85%;
+    width: 80%;
     background-color: transparent;
     border-radius: 10px;
     border: black solid 3px;
     font-family: 'Poppins', sans-serif;
 }
 
+.limit{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+    width: 5%;
+    margin-left: 2%;
+}
+
 .sendButton{
     height: 80%;
     width: 10%;
-    margin-left: 1%;
+    margin-left: 2%;
     border-radius: 20px;
     border: black solid 3px;
     background-color:dodgerblue;

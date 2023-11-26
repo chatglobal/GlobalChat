@@ -1,12 +1,24 @@
-import Post from "./post.js";
-export default round;
+import Post from "./post.js"
+export default round
 
-document.getElementById("sendButton").addEventListener("click", function(){
-    const messageBox = document.getElementById("messageBox")
+const messageBox = document.getElementById("messageBox")
+const sendButton = document.getElementById("sendButton")
+const limit = document.getElementById("limit")
+
+sendButton.addEventListener("click", function(){
     if (messageBox.value != ""){
         let post = new Post("TestPoster", null, messageBox.value, 0)
         post.post()
         messageBox.value = ""
+    }
+})
+
+messageBox.addEventListener("keyup", function(){
+    limit.textContent = messageBox.value.length+"/"+messageBox.maxLength
+    if(messageBox.value.length == messageBox.maxLength){
+        limit.style.color = "red"
+    } else{
+        limit.style.color = "black"
     }
 })
 
