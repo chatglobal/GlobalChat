@@ -1,7 +1,5 @@
 import Post from "./post.js"
-export default round
 
-const messages = document.getElementById("messages")
 const inputBox = document.getElementById("inputBox")
 const sendButton = document.getElementById("sendButton")
 const limit = document.getElementById("limit")

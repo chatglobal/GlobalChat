@@ -14,7 +14,7 @@ body{
 }
 
 .container{
-    margin-left: 10%;
+    margin: 2.5%;
     border: black solid 3px;
     width: 30%;
     height: 80vh;

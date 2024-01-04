@@ -1,5 +1,3 @@
-import round from "./main.js"
-
 export default class Post{
     //------------Properties------------\\
     message
