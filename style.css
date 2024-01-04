@@ -79,20 +79,21 @@ body{
     font-family: 'Poppins', sans-serif;
 }
 
-
 .footer{
     display: flex;
+    height: 45px;
 }
 
 .footer input{
     flex: 1;    
-    height: 40px;
+    height: 100%;
     width: 80%;
     border: none;
     outline: none;
     padding-left: 5px;
     font-size: 16px;
     background-color: gainsboro;
+    font-family: 'Poppins', sans-serif;
 }
 
 .footer p{
@@ -100,12 +101,14 @@ body{
     display: flex;
     justify-content: center;
     align-items: center;
+    height: 100%;
     padding-left: 2%;
     padding-right: 2%;
 }
 
 .footer button{
     width: 20%;
+    height: 100%;
     font-size: 18px;
     border: none;
     outline: none;

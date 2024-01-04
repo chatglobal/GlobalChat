@@ -21,22 +21,3 @@ inputBox.addEventListener("keyup", function(){
         limit.style.color = "black"
     }
 })
-
-
-//------------Like Rounding------------\\
-const increments = [
-    [1000, "K"],
-    [1000000, "M"],
-    [1000000000, "B"],
-    [1000000000000, "T"],
-
-]
-
-function round(num){
-    for(let i = increments.length-1; i >= 0; i--){
-        if(num >= increments[i][0]){
-            return Math.floor((num/increments[i][0])*10)/10 + increments[i][1]
-        }
-    }
-    return num
-}
