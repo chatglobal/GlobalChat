@@ -6,14 +6,12 @@ export default class Post{
     userName
     profilePicSrc
     element
-    numLikes
     //------------Constructor------------\\
-    constructor(userName, profilePicture, message,numLikes){
+    constructor(userName, profilePicture, message){
         //------------Properties------------\\
         this.userName = userName
         this.profilePicSrc = profilePicture
         this.message = message
-        this.numLikes = numLikes
         //------------Element Creation------------\\
         this.element = document.createElement("div")
         this.element.classList.add("post")
@@ -27,48 +25,25 @@ export default class Post{
         profilePic.classList.add("profilePicture")
         this.element.appendChild(profilePic)
         //------------Content Div------------\\
-        let content = document.createElement("div")
-        content.classList.add("content")
-        this.element.appendChild(content)
+        let textContainer = document.createElement("div")
+        this.element.appendChild(textContainer)
         //------------UserName------------\\
         let name = document.createElement("p")
         name.classList.add("userName")
         name.textContent = userName
-        content.appendChild(name)
+        textContainer.appendChild(name)
         //------------Message------------\\
         let text = document.createElement("p")
         text.classList.add("message")
         text.textContent = message
-        content.appendChild(text)
-        //------------Likes------------\\
-        let likes = document.createElement("div")
-        likes.classList.add("likes")
-        this.element.appendChild(likes)
-        let likeIcon = document.createElement("i")
-        likeIcon.textContent = "favorite"
-        likeIcon.style.color = "grey"
-        likeIcon.classList.add("material-icons")
-        likeIcon.classList.add("likeImage")
-        likes.appendChild(likeIcon)
-        let likeCounter = document.createElement("p")
-        likeCounter.textContent = numLikes
-        likeCounter.classList.add("likeCounter")
-        likes.appendChild(likeCounter)
-        // Like button functionality
-        likeIcon.addEventListener("click", function(){
-            likeIcon.style.color = "magenta"
-            numLikes++
-            likeCounter.textContent = round(numLikes)
-        })
+        textContainer.appendChild(text)
     }
     //------------Methods------------\\
     post() {
         // This will be where the client connects to the firebase database.
-        document.getElementById("messages").appendChild(this.element)
-    }
-
-    addLike(){
-        this.numLikes++
+        let messages = document.getElementById("messages")
+        messages.appendChild(this.element)
+        messages.lastChild.scrollIntoView({behavior: "smooth"})
     }
 
     getMessage(){
@@ -77,9 +52,5 @@ export default class Post{
 
     getUser(){
         return this.userName
-    }
-
-    getLikes(){
-        return this.numLikes
     }
 }

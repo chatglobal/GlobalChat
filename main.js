@@ -1,21 +1,23 @@
 import Post from "./post.js"
 export default round
 
-const messageBox = document.getElementById("messageBox")
+const messages = document.getElementById("messages")
+const inputBox = document.getElementById("inputBox")
 const sendButton = document.getElementById("sendButton")
 const limit = document.getElementById("limit")
 
 sendButton.addEventListener("click", function(){
-    if (messageBox.value != ""){
-        let post = new Post("TestPoster", null, messageBox.value, 0)
+    if (inputBox.value != ""){
+        let post = new Post("TestPoster", null, inputBox.value)
         post.post()
-        messageBox.value = ""
+        inputBox.value = ""
+        limit.textContent = "0/"+inputBox.maxLength
     }
 })
 
-messageBox.addEventListener("keyup", function(){
-    limit.textContent = messageBox.value.length+"/"+messageBox.maxLength
-    if(messageBox.value.length == messageBox.maxLength){
+inputBox.addEventListener("keyup", function(){
+    limit.textContent = inputBox.value.length+"/"+inputBox.maxLength
+    if(inputBox.value.length == inputBox.maxLength){
         limit.style.color = "red"
     } else{
         limit.style.color = "black"
