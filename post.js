@@ -35,7 +35,7 @@ export default class Post{
         //------------Message------------\\
         let text = document.createElement("p")
         text.classList.add("message")
-        text.textContent = message
+        text.textContent = this.filterMessage(message)
         textContainer.appendChild(text)
     }
     //------------Methods------------\\
@@ -52,28 +52,6 @@ export default class Post{
 
     getUser(){
         return this.userName
-    }
-
-    processMessage(message, lang){
-        const filteredWords = []
-        translate(message, {to: "en"}).then(result => {
-            message = message.text
-        }).catch(error =>{
-            console.log(error)
-        })
-        // Ex: I like to shit -> I like to ****
-        let filteredMessage = ""
-        for(let i = 0; i < filteredWords.length; i++){
-            let astricks = ""
-            let index = 0
-            for(let w = 0; w < filteredWords[i].length; w++){
-                astricks += "*"
-            }
-            while(message.indexOf(filteredWords[i]) != -1){
-                index = message.indexOf(filteredWords[i])
-                filteredMessage = message.substring(0, index) + astricks + message.substring(index)
-            }
-        }
     }
 
     // Filters a message based on an array of banned words. Returns a string.
