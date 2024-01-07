@@ -5,6 +5,7 @@ export default class Post{
     message
     userName
     profilePicSrc
+    element
     //------------Constructor------------\\
     constructor(userName, profilePicture, message){
         //------------Properties------------\\
@@ -12,8 +13,8 @@ export default class Post{
         this.profilePicSrc = profilePicture
         this.message = message
         //------------Element Creation------------\\
-        let element = document.createElement("div")
-        element.classList.add("post")
+        this.element = document.createElement("div")
+        this.element.classList.add("post")
         //------------Profile Picture------------\\
         let profilePic = document.createElement("img")
         if(profilePicture == null){
@@ -22,10 +23,10 @@ export default class Post{
             profilePic.src = profilePicture 
         }
         profilePic.classList.add("profilePicture")
-        element.appendChild(profilePic)
+        this.element.appendChild(profilePic)
         //------------Content Div------------\\
         let textContainer = document.createElement("div")
-        element.appendChild(textContainer)
+        this.element.appendChild(textContainer)
         //------------UserName------------\\
         let name = document.createElement("p")
         name.classList.add("userName")

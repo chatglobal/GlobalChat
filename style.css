@@ -11,6 +11,7 @@
 body{
     height: 100vh;
     display: flex; 
+    top: 0;
 }
 
 .container{
@@ -120,4 +121,14 @@ body{
 .footer button:hover{
     background-color: rgb(50, 50, 218);
     transition: 0.2s ease;
+}
+
+body #translate{
+    width: 10%;
+    height: 10%;
+    margin-top: 40px;
+}
+
+.skiptranslate iframe{
+    display: none;
 }
