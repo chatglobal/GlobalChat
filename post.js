@@ -1,5 +1,3 @@
-//import translate from "google-translate-api"
-
 export default class Post{
     //------------Properties------------\\
     message
@@ -7,20 +5,20 @@ export default class Post{
     profilePicSrc
     element
     //------------Constructor------------\\
-    constructor(userName, profilePicture, message){
+    constructor(userName, profilePicSrc, message){
         //------------Properties------------\\
         this.userName = userName
-        this.profilePicSrc = profilePicture
+        this.profilePicSrc = profilePicSrc
         this.message = message
         //------------Element Creation------------\\
         this.element = document.createElement("div")
         this.element.classList.add("post")
         //------------Profile Picture------------\\
         let profilePic = document.createElement("img")
-        if(profilePicture == null){
+        if(profilePicSrc == null){
             profilePic.src = "https://shodis.ch/wp-content/uploads/2018/01/person_grey_192x192.png"
         } else{
-            profilePic.src = profilePicture 
+            profilePic.src = profilePicSrc
         }
         profilePic.classList.add("profilePicture")
         this.element.appendChild(profilePic)
@@ -52,6 +50,10 @@ export default class Post{
 
     getUser(){
         return this.userName
+    }
+
+    getProfilePicture(){
+        return this.profilePicSrc
     }
 
     // Filters a message based on an array of banned words. Returns a string.

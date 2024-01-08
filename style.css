@@ -24,9 +24,25 @@ body{
     background-color: lightblue;
 }
 
+.header{
+    display: flex;
+}
+
 .header h1{
     color: white;
     padding: 15px;
+}
+
+.header button{
+    width: 8%;
+    height: 50%;
+    align-self: center;
+    margin-left: 45%;
+    font-size: 25px;
+    border-radius: 10%;
+    border: solid black;
+    background-color: aliceblue;
+    cursor: pointer;
 }
 
 .body{
@@ -123,10 +139,25 @@ body{
     transition: 0.2s ease;
 }
 
+.settings{
+    border-top: black solid 3px;
+}
+
+.settings .category{
+    display: flex;
+    margin-top: 2%;
+    margin-bottom: 2%;
+    margin-left: 2%;
+}
+
+.settings div p{
+    margin-right: 3%;
+    width: auto;
+}
+
 body #translate{
     width: 10%;
     height: 10%;
-    margin-top: 40px;
 }
 
 .skiptranslate iframe{
