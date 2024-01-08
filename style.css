@@ -11,13 +11,13 @@
 body{
     height: 100vh;
     display: flex; 
-    top: 0;
+    top: 0 !important;
 }
 
 .container{
     margin: 2.5%;
     border: black solid 3px;
-    width: 30%;
+    width: 50%;
     height: 80vh;
     display: flex;
     flex-direction: column;
@@ -33,23 +33,11 @@ body{
     padding: 15px;
 }
 
-.header button{
-    width: 8%;
-    height: 50%;
-    align-self: center;
-    margin-left: 45%;
-    font-size: 25px;
-    border-radius: 10%;
-    border: solid black;
-    background-color: aliceblue;
-    cursor: pointer;
-}
-
 .body{
     flex: 1;
     color: white;
     background-color: white;
-    overflow: auto;
+    overflow-y: auto;
 }
 
 .post{
@@ -58,7 +46,7 @@ body{
     align-items: center;
     max-height: 500px;
     min-width: 60%;
-    max-width: 100%;
+    max-width: 95%;
     padding-left: 5px;
     padding-top: 10px;
     padding-bottom: 10px;
@@ -119,22 +107,38 @@ body{
     justify-content: center;
     align-items: center;
     height: 100%;
+    width: 10%;
+    max-width: 100px;
     padding-left: 2%;
     padding-right: 2%;
 }
 
 .footer button{
-    width: 20%;
+    max-width: 75px;
+    width: 10%;
     height: 100%;
-    font-size: 18px;
+    font-size: 20px; 
     border: none;
     outline: none;
-    background-color: dodgerblue;
-    color: white;
     cursor: pointer;
 }
 
-.footer button:hover{
+.footer #sendButton{
+    background-color: dodgerblue;
+    color: white;
+}
+
+.footer #sendButton:hover{
+    background-color: rgb(50, 50, 218);
+    transition: 0.2s ease;
+}
+
+.footer #settingsButton{
+    background-color: rgb(173, 173, 173);
+    color: rgb(0, 0, 0);
+}
+
+.footer #settingsButton:hover{
     background-color: rgb(50, 50, 218);
     transition: 0.2s ease;
 }
@@ -148,16 +152,53 @@ body{
     margin-top: 2%;
     margin-bottom: 2%;
     margin-left: 2%;
+    max-width: 500px;
 }
 
 .settings div p{
-    margin-right: 3%;
+    margin-right: 2%;
     width: auto;
 }
 
-body #translate{
-    width: 10%;
-    height: 10%;
+.settings #usernameInput{
+    border: transparent;
+    border-radius: 10px;
+    background-color: white;
+    padding: 0 1%;
+    font-family: "Poppins", sans-serif;
+}
+
+.settings #pfpSection{
+    align-items: center;
+}
+
+.settings #pfpInputLabel{
+    font-size: 26px;
+    cursor: pointer;
+}
+
+.settings #pfpPreview{
+    height: 40px;
+    width: 40px;
+    margin-right: 2%;
+    border: black solid;
+    border-radius: 100%;
+}
+
+.settings #pfpInput{
+    display: none;
+}
+
+.settings #translate{
+    font-family: "Poppins", sans-serif;
+}
+
+.settings #translate select{
+    border: transparent;
+    border-radius: 10px;
+    padding: 1% 1%;
+    background-color: white;
+    font-family: "Poppins", sans-serif;
 }
 
 .skiptranslate iframe{

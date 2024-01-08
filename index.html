@@ -14,7 +14,6 @@
     <div class="container">
         <div class="header">
             <h1>Chat Room</h1>
-            <button type="button" id="settingsButton"><i class="bi-gear-fill"></i></button>
         </div>
         <div class="body">
             <div class="messages" id="messages"></div>
@@ -23,18 +22,20 @@
             <input type="text" maxlength="1000" id="inputBox" class="inputBox" placeholder="Type your message here...">
             <p class="limit" id="limit">0/1000</p>
             <button id="sendButton" class="sendButton"><i class="bi-send"></i></button>
+            <button type="button" id="settingsButton"><i class="bi-gear-fill"></i></button>
         </div>
-
         <div class="settings" id="settings">
-            <div class="category">
+            <div class="category" id="usernameSection">
                 <p>Username: </p>
-                <input type="text" id="usernameInput">
+                <input type="text" id="usernameInput" maxlength="20">
             </div>
-            <div class="category"> 
+            <div class="category" id="pfpSection"> 
                 <p>Profile Picture: </p>
-                <input type="file" accept=".jpeg,.jpg,.png" id="pfpInput">
+                <img src="https://shodis.ch/wp-content/uploads/2018/01/person_grey_192x192.png" alt="" id="pfpPreview">
+                <label for="pfpInput"><i class="bi-cloud-arrow-up-fill" id="pfpInputLabel"></i></label>
+                <input type="file" accept=".jpeg,.jpg,.png,.gif" id="pfpInput">
             </div>
-            <div class="category">
+            <div class="category" id="languageSection">
                 <p id="translateP">Language: Loading...</p>
                 <div id="translate"></div>
             </div>
