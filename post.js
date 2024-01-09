@@ -37,13 +37,6 @@ export default class Post{
         textContainer.appendChild(text)
     }
     //------------Methods------------\\
-    post() {
-        // This will be where the client connects to the firebase database.
-        let messages = document.getElementById("messages")
-        messages.appendChild(this.element)
-        messages.lastChild.scrollIntoView({behavior: "smooth"})
-    }
-
     getMessage(){
         return this.message
     }

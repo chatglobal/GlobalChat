@@ -21,7 +21,7 @@ body{
     height: 80vh;
     display: flex;
     flex-direction: column;
-    background-color: lightblue;
+    background-color: rgb(19, 157, 203);
 }
 
 .header{
@@ -79,7 +79,9 @@ body{
     max-width: 100%;
     margin-left: 10px;
     padding: 4px;
-    background-color: lightblue;
+    background-color: gainsboro;
+    color:black;
+    padding: 5px 7px;
     border-radius: 10px;
     font-family: 'Poppins', sans-serif;
 }
@@ -114,7 +116,7 @@ body{
 }
 
 .footer button{
-    max-width: 75px;
+    max-width: 60px;
     width: 10%;
     height: 100%;
     font-size: 20px; 
@@ -126,25 +128,31 @@ body{
 .footer #sendButton{
     background-color: dodgerblue;
     color: white;
+    font-size: 20px;
 }
 
 .footer #sendButton:hover{
     background-color: rgb(50, 50, 218);
     transition: 0.2s ease;
+    font-size: 23px;
 }
 
 .footer #settingsButton{
     background-color: rgb(173, 173, 173);
     color: rgb(0, 0, 0);
+    font-size: 20px;
 }
 
 .footer #settingsButton:hover{
-    background-color: rgb(50, 50, 218);
+    background-color: rgb(183, 183, 185);
     transition: 0.2s ease;
+    font-size: 23px;
 }
 
 .settings{
     border-top: black solid 3px;
+    display: none;
+    background-color: rgb(197, 228, 234);
 }
 
 .settings .category{
@@ -154,6 +162,7 @@ body{
     margin-left: 2%;
     max-width: 500px;
 }
+
 
 .settings div p{
     margin-right: 2%;
@@ -175,6 +184,11 @@ body{
 .settings #pfpInputLabel{
     font-size: 26px;
     cursor: pointer;
+    transition: 0.2s ease;
+}
+
+.settings #pfpInputLabel:hover{
+    font-size: 28px;
 }
 
 .settings #pfpPreview{
@@ -199,6 +213,7 @@ body{
     padding: 1% 1%;
     background-color: white;
     font-family: "Poppins", sans-serif;
+    cursor: pointer;
 }
 
 .skiptranslate iframe{
