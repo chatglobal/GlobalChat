@@ -37,7 +37,7 @@ body{
     flex: 1;
     color: white;
     background-color: white;
-    overflow-y: auto;
+    overflow: auto;
 }
 
 .post{

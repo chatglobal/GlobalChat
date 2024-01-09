@@ -15,7 +15,7 @@ export default class Post{
         this.element.classList.add("post")
         //------------Profile Picture------------\\
         let profilePic = document.createElement("img")
-        if(profilePicSrc == null){
+        if(profilePicSrc == null || profilePicSrc == "null"){
             profilePic.src = "https://shodis.ch/wp-content/uploads/2018/01/person_grey_192x192.png"
         } else{
             profilePic.src = profilePicSrc
@@ -47,6 +47,14 @@ export default class Post{
 
     getProfilePicture(){
         return this.profilePicSrc
+    }
+
+    getDate(){
+        return this.date
+    }
+
+    getElement(){
+        return this.element
     }
 
     // Filters a message based on an array of banned words. Returns a string.

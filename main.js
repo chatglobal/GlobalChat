@@ -1,10 +1,10 @@
+// Stopped at auto scroll to bottom
 //-----------Imports-----------\\
 import Post from "./post.js"
-
 //-------------------------------Database-------------------------------\\
 // Import the functions you need from the SDKs you need
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, set, get, ref, child } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { getDatabase, set, get, ref, child, push, onChildAdded} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 // TODO: Add SDKs for Firebase products that you want to use
 // https://firebase.google.com/docs/web/setup#available-libraries
 
@@ -66,15 +66,17 @@ pfpInput.addEventListener("change", function(){
 const inputBox = document.getElementById("inputBox")
 const sendButton = document.getElementById("sendButton")
 const limit = document.getElementById("limit")
+const messageBox = document.getElementById("messages")
 
 sendButton.addEventListener("click", function(){
     if (inputBox.value != ""){
         let post = new Post(username, profilePic, inputBox.value)
-        set(db, ref("ChatRoom1/1"),{ //stopped here
+        const messagesRef = ref(db, "chatroom")
+        const pushMessagesRef = push(messagesRef)
+        set(pushMessagesRef,{ //stopped here
             username: post.userName,
-            profilepicsrc: post.profilePicSrc,
+            profilepicsrc: String(post.profilePicSrc),
             message: post.message,
-            element: post.element
         })
         inputBox.value = ""
         limit.textContent = "0/"+inputBox.maxLength
@@ -89,5 +91,12 @@ inputBox.addEventListener("input", function(){
         limit.style.color = "black"
     }
 })
-
-
+//---------------------Loads Messages---------------------\\
+document.addEventListener("scroll", function(){
+    console.log("scrolling")
+})
+onChildAdded(ref(db, "chatroom"), (data) =>{
+    let messageContents = data.val()
+    let post = new Post(messageContents.username, messageContents.profilepicsrc, messageContents.message)
+    messageBox.appendChild(post.getElement())
+})
