@@ -22,11 +22,12 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
-const dbref = ref(db);
 //-------------------------------Settings-------------------------------\\
+let lastPost = null
 const usenameInput = document.getElementById("usernameInput")
 const pfpInput = document.getElementById("pfpInput")
 const pfpPreview = document.getElementById("pfpPreview")
+const scrollDown = document.getElementById("scrollDown")
 const settingsButton = document.getElementById("settingsButton")
 const settingsBox = document.getElementById("settings")
 
@@ -62,6 +63,15 @@ pfpInput.addEventListener("change", function(){
         })
     }
 })
+
+let scrollToBottom = true
+scrollDown.checked = true
+scrollDown.addEventListener("change", function(){
+    scrollToBottom = !scrollToBottom
+    if(lastPost != null && scrollToBottom){
+        lastPost.scrollIntoView({behavior:"smooth", block:"end"})
+    }
+})
 //---------------------Send---------------------\\
 const inputBox = document.getElementById("inputBox")
 const sendButton = document.getElementById("sendButton")
@@ -92,11 +102,12 @@ inputBox.addEventListener("input", function(){
     }
 })
 //---------------------Loads Messages---------------------\\
-document.addEventListener("scroll", function(){
-    console.log("scrolling")
-})
 onChildAdded(ref(db, "chatroom"), (data) =>{
     let messageContents = data.val()
     let post = new Post(messageContents.username, messageContents.profilepicsrc, messageContents.message)
-    messageBox.appendChild(post.getElement())
+    lastPost = post.getElement()
+    messageBox.appendChild(lastPost)
+    if(scrollToBottom){
+        lastPost.scrollIntoView({behavior:"smooth", block:"end"})
+    }
 })
