@@ -134,7 +134,7 @@ function filterMessage(message){
     return message
 }
 //-------------------------------Uploads Messages-------------------------------\\
-sendButton.addEventListener("click", function(){
+function sendMessage(){
     if (inputBox.value != ""){
         const messagesRef = ref(db, channel)
         const pushMessagesRef = push(messagesRef)
@@ -146,7 +146,9 @@ sendButton.addEventListener("click", function(){
         inputBox.value = ""
         limit.textContent = "0/"+inputBox.maxLength
     }
-})
+}
+sendButton.addEventListener("click", sendMessage)
+document.onkeyup(sendMessage)
 //---------------------Loads Messages---------------------\\
 onChildAdded(ref(db, channel), (data) =>{
     //------------Data from firebase------------\\
