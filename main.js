@@ -148,7 +148,11 @@ function sendMessage(){
     }
 }
 sendButton.addEventListener("click", sendMessage)
-document.onkeyup(sendMessage)
+document.onkeyup = function(e){
+    if(e.key == "Enter"){
+        sendMessage()
+    }
+}
 //---------------------Loads Messages---------------------\\
 onChildAdded(ref(db, channel), (data) =>{
     //------------Data from firebase------------\\
