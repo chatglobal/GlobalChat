@@ -1,7 +1,7 @@
 //-------------------------------Database-------------------------------\\
 // Import functions
-import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, set, ref, push, onChildAdded} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
+import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js"
+import { getDatabase, set, ref, push, onChildAdded} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js"
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -15,8 +15,8 @@ const firebaseConfig = {
 };
 
 // Initialize Firebase
-const app = initializeApp(firebaseConfig);
-const db = getDatabase();
+const app = initializeApp(firebaseConfig)
+const db = getDatabase()
 //-------------------------------Variables-------------------------------\\
 let lastPost = null
 let channel = "global"
