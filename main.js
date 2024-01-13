@@ -1,12 +1,8 @@
-// Stopped at auto scroll to bottom
-//-----------Imports-----------\\
-import Post from "./post.js"
 //-------------------------------Database-------------------------------\\
-// Import the functions you need from the SDKs you need
+// note to self: fix scaling css for the messages
+// Import functions
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
-import { getDatabase, set, get, ref, child, push, onChildAdded} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
-// TODO: Add SDKs for Firebase products that you want to use
-// https://firebase.google.com/docs/web/setup#available-libraries
+import { getDatabase, set, ref, push, onChildAdded} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
 
 // Your web app's Firebase configuration
 const firebaseConfig = {
@@ -22,15 +18,18 @@ const firebaseConfig = {
 // Initialize Firebase
 const app = initializeApp(firebaseConfig);
 const db = getDatabase();
-//-------------------------------Settings-------------------------------\\
+//-------------------------------Variables-------------------------------\\
 let lastPost = null
 const usenameInput = document.getElementById("usernameInput")
 const pfpInput = document.getElementById("pfpInput")
 const pfpPreview = document.getElementById("pfpPreview")
-const scrollDown = document.getElementById("scrollDown")
 const settingsButton = document.getElementById("settingsButton")
 const settingsBox = document.getElementById("settings")
-
+const inputBox = document.getElementById("inputBox")
+const sendButton = document.getElementById("sendButton")
+const limit = document.getElementById("limit")
+const messageBox = document.getElementById("messages")
+//-------------------------------Settings-------------------------------\\
 let settings = false
 settingsButton.addEventListener("click", function(){
     if (settings == true){
@@ -42,17 +41,26 @@ settingsButton.addEventListener("click", function(){
 })
 
 let username = "Guest"
+if(localStorage.getItem("username") != null){
+    username = localStorage.getItem("username")
+}
 usenameInput.value = username
 usenameInput.addEventListener("change", function(){
     if(usenameInput.value != ""){
         username = usenameInput.value
+        localStorage.setItem("username", usenameInput.value)
     } else{
         username = "Guest"
         usenameInput.value = username
+        localStorage.setItem("username", "Guest")
     }
 })
 
 let profilePic = null
+if(localStorage.getItem("profilepic") != null){
+    profilePic = localStorage.getItem("profilepic")
+    pfpPreview.src = profilePic
+}
 const reader = new FileReader()
 pfpInput.addEventListener("change", function(){
     if(pfpInput.value != ""){
@@ -60,6 +68,7 @@ pfpInput.addEventListener("change", function(){
         reader.addEventListener("load", function(){
             profilePic = reader.result
             pfpPreview.src = reader.result
+            localStorage.setItem("profilepic", String(reader.result))
         })
     }
 })
@@ -73,20 +82,42 @@ scrollDown.addEventListener("change", function(){
     }
 })
 //---------------------Send---------------------\\
-const inputBox = document.getElementById("inputBox")
-const sendButton = document.getElementById("sendButton")
-const limit = document.getElementById("limit")
-const messageBox = document.getElementById("messages")
+// Filters a message based on an array of banned words. Returns a string.
+function filterMessage(message){
+    // Banned words list
+    const filteredWords = ["fuck", "shit", "bitch", "ass", "nigger", "cock", "pussy"] 
+    for(let i = 0; i < filteredWords.length; i++){
+        // Don't have to worry about people trying to bypass using caps 
+        let lowercaseMessage = message.toLowerCase() 
+        // Failsafe in case something happens to while loop
+        let times = 0
+        // Takes the filtered word and converts it into astricks. Stores it
+        let astricks = "" 
+        for(let w = 0; w < filteredWords[i].length; w++){
+            astricks += "*"
+        }
+        let index = 0
+        while(lowercaseMessage.indexOf(filteredWords[i]) != -1 && times < 1001){
+            // Finds the occurance of the banned word
+            index = lowercaseMessage.indexOf(filteredWords[i])
+            // Censors it in both messages
+            message = message.substring(0, index) + astricks + message.substring(index+filteredWords[i].length)
+            lowercaseMessage = lowercaseMessage.substring(0, index) + astricks + lowercaseMessage.substring(index+filteredWords[i].length)
+            // Adds to our failsafe
+            times += 1
+        }
+    }
+    return message
+}
 
 sendButton.addEventListener("click", function(){
     if (inputBox.value != ""){
-        let post = new Post(username, profilePic, inputBox.value)
         const messagesRef = ref(db, "chatroom")
         const pushMessagesRef = push(messagesRef)
-        set(pushMessagesRef,{ //stopped here
-            username: post.userName,
-            profilepicsrc: String(post.profilePicSrc),
-            message: post.message,
+        set(pushMessagesRef,{ 
+            username: username,
+            profilepicsrc: String(profilePic),
+            message: inputBox.value,
         })
         inputBox.value = ""
         limit.textContent = "0/"+inputBox.maxLength
@@ -103,10 +134,36 @@ inputBox.addEventListener("input", function(){
 })
 //---------------------Loads Messages---------------------\\
 onChildAdded(ref(db, "chatroom"), (data) =>{
+    //------------Data from firebase------------\\
     let messageContents = data.val()
-    let post = new Post(messageContents.username, messageContents.profilepicsrc, messageContents.message)
-    lastPost = post.getElement()
-    messageBox.appendChild(lastPost)
+     //------------Element Creation------------\\
+     let element = document.createElement("div")
+     element.classList.add("post")
+     //------------Profile Picture------------\\
+     let profilePic = document.createElement("img")
+     if(messageContents.profilepicsrc == null || messageContents.profilepicsrc == "null"){
+         profilePic.src = "https://shodis.ch/wp-content/uploads/2018/01/person_grey_192x192.png"
+     } else{
+         profilePic.src = messageContents.profilepicsrc 
+     }
+     profilePic.classList.add("profilePicture")
+     element.appendChild(profilePic)
+     //------------Content Div------------\\
+     let textContainer = document.createElement("div")
+     element.appendChild(textContainer)
+     //------------UserName------------\\
+     let name = document.createElement("p")
+     name.classList.add("userName")
+     name.textContent = messageContents.username
+     textContainer.appendChild(name)
+     //------------Message------------\\
+     let text = document.createElement("p")
+     text.classList.add("message")
+     text.textContent = filterMessage(messageContents.message)
+     textContainer.appendChild(text)
+    //------------Append to messages------------\\
+    messageBox.appendChild(element)
+    lastPost = element
     if(scrollToBottom){
         lastPost.scrollIntoView({behavior:"smooth", block:"end"})
     }
