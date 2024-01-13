@@ -89,6 +89,7 @@ p{
 .messageFooter{
     display: flex;
     height: 45px;
+    background-color: gainsboro;
 }
 
 .messageFooter input{
