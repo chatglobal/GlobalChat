@@ -220,6 +220,6 @@ p{
 
 @media (pointer: none){
     .messageContainer{
-        width: 90%;
+        width: 90% !important;
     }
 }
