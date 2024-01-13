@@ -20,6 +20,7 @@ const app = initializeApp(firebaseConfig);
 const db = getDatabase();
 //-------------------------------Variables-------------------------------\\
 let lastPost = null
+let channel = "global"
 const usenameInput = document.getElementById("usernameInput")
 const pfpInput = document.getElementById("pfpInput")
 const pfpPreview = document.getElementById("pfpPreview")
@@ -39,7 +40,7 @@ settingsButton.addEventListener("click", function(){
     }
     settings = !settings
 })
-
+//-------------------------------Username-------------------------------\\
 let username = "Guest"
 if(localStorage.getItem("username") != null){
     username = localStorage.getItem("username")
@@ -55,7 +56,7 @@ usenameInput.addEventListener("change", function(){
         localStorage.setItem("username", "Guest")
     }
 })
-
+//-------------------------------Profile Picture-------------------------------\\
 let profilePic = null
 if(localStorage.getItem("profilepic") != null){
     profilePic = localStorage.getItem("profilepic")
@@ -72,17 +73,29 @@ pfpInput.addEventListener("change", function(){
         })
     }
 })
-
+//-------------------------------Scrolling-------------------------------\\
 let scrollToBottom = true
-scrollDown.checked = true
+if(localStorage.getItem("scrolltobottom") != null){
+    scrollToBottom = (localStorage.getItem("scrolltobottom") == "true")
+} 
+scrollDown.checked = scrollToBottom 
 scrollDown.addEventListener("change", function(){
     scrollToBottom = !scrollToBottom
+    localStorage.setItem("scrolltobottom", scrollToBottom)
     if(lastPost != null && scrollToBottom){
         lastPost.scrollIntoView({behavior:"smooth", block:"end"})
     }
 })
-//---------------------Send---------------------\\
-// Filters a message based on an array of banned words. Returns a string.
+//-------------------------------Character Limit-------------------------------\\
+inputBox.addEventListener("input", function(){
+    limit.textContent = inputBox.value.length+"/"+inputBox.maxLength
+    if(inputBox.value.length == inputBox.maxLength){
+        limit.style.color = "red"
+    } else{
+        limit.style.color = "black"
+    }
+})
+//---------------------Filter---------------------\\
 function filterMessage(message){
     // Banned words list
     const filteredWords = ["fuck", "shit", "bitch", "ass", "nigger", "cock", "pussy"] 
@@ -109,10 +122,10 @@ function filterMessage(message){
     }
     return message
 }
-
+//-------------------------------Uploads Messages-------------------------------\\
 sendButton.addEventListener("click", function(){
     if (inputBox.value != ""){
-        const messagesRef = ref(db, "chatroom")
+        const messagesRef = ref(db, channel)
         const pushMessagesRef = push(messagesRef)
         set(pushMessagesRef,{ 
             username: username,
@@ -123,17 +136,8 @@ sendButton.addEventListener("click", function(){
         limit.textContent = "0/"+inputBox.maxLength
     }
 })
-
-inputBox.addEventListener("input", function(){
-    limit.textContent = inputBox.value.length+"/"+inputBox.maxLength
-    if(inputBox.value.length == inputBox.maxLength){
-        limit.style.color = "red"
-    } else{
-        limit.style.color = "black"
-    }
-})
 //---------------------Loads Messages---------------------\\
-onChildAdded(ref(db, "chatroom"), (data) =>{
+onChildAdded(ref(db, channel), (data) =>{
     //------------Data from firebase------------\\
     let messageContents = data.val()
      //------------Element Creation------------\\
@@ -163,6 +167,7 @@ onChildAdded(ref(db, "chatroom"), (data) =>{
      textContainer.appendChild(text)
     //------------Append to messages------------\\
     messageBox.appendChild(element)
+    //------------Scrolls to the bottom------------\\
     lastPost = element
     if(scrollToBottom){
         lastPost.scrollIntoView({behavior:"smooth", block:"end"})
