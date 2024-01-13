@@ -29,6 +29,19 @@ const inputBox = document.getElementById("inputBox")
 const sendButton = document.getElementById("sendButton")
 const limit = document.getElementById("limit")
 const messageBox = document.getElementById("messages")
+const container = document.getElementById("messageContainer")
+//-------------------------------Screen Resize-------------------------------\\
+const mql = window.matchMedia("(min-width: 720px")
+mql.addEventListener("change", handleScreenResize)
+function handleScreenResize(mql){
+    console.log(mql.matches)
+    if(mql.matches){
+        container.style.width = "50%"
+    } else{
+        container.style.width = "90%"
+    }
+}
+handleScreenResize(mql)
 //-------------------------------Settings-------------------------------\\
 let settings = false
 settingsButton.addEventListener("click", function(){

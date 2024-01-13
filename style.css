@@ -217,9 +217,3 @@ p{
 .skiptranslate iframe{
     display: none;
 }
-
-@media (pointer: none){
-    .messageContainer{
-        width: 90% !important;
-    }
-}
