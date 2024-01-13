@@ -34,7 +34,6 @@ const container = document.getElementById("messageContainer")
 const mql = window.matchMedia("(min-width: 720px")
 mql.addEventListener("change", handleScreenResize)
 function handleScreenResize(mql){
-    console.log(mql.matches)
     if(mql.matches){
         container.style.width = "50%"
     } else{
