@@ -1,5 +1,4 @@
 //-------------------------------Database-------------------------------\\
-// note to self: fix scaling css for the messages
 // Import functions
 import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
 import { getDatabase, set, ref, push, onChildAdded} from "https://www.gstatic.com/firebasejs/10.7.1/firebase-database.js";
