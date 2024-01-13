@@ -38,7 +38,7 @@ function handleScreenResize(mql){
     if(mql.matches){
         container.style.width = "50%"
     } else{
-        container.style.width = "100%"
+        container.style.width = "50%"
     }
 }
 handleScreenResize(mql)
