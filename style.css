@@ -25,6 +25,12 @@ p{
     background-color: rgb(19, 157, 203);
 }
 
+@media screen and (min-width: 720px) {
+    .messageContainer{
+        width: 100%;
+    }
+}
+
 .messageHeader{
     display: flex;
 }
