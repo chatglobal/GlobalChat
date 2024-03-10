@@ -29,7 +29,6 @@ const inputBox = document.getElementById("inputBox")
 const sendButton = document.getElementById("sendButton")
 const limit = document.getElementById("limit")
 const messageBox = document.getElementById("messages")
-const container = document.getElementById("messageContainer")
 //-------------------------------Settings-------------------------------\\
 let settings = false
 settingsButton.addEventListener("click", function(){
@@ -95,33 +94,6 @@ inputBox.addEventListener("input", function(){
         limit.style.color = "black"
     }
 })
-//---------------------Filter---------------------\\
-function filterMessage(message){
-    // Banned words list
-    const filteredWords = ["fuck", "shit", "bitch", "ass", "nigger", "cock", "pussy"] 
-    for(let i = 0; i < filteredWords.length; i++){
-        // Don't have to worry about people trying to bypass using caps 
-        let lowercaseMessage = message.toLowerCase() 
-        // Failsafe in case something happens to while loop
-        let times = 0
-        // Takes the filtered word and converts it into astricks. Stores it
-        let astricks = "" 
-        for(let w = 0; w < filteredWords[i].length; w++){
-            astricks += "*"
-        }
-        let index = 0
-        while(lowercaseMessage.indexOf(filteredWords[i]) != -1 && times < 1001){
-            // Finds the occurance of the banned word
-            index = lowercaseMessage.indexOf(filteredWords[i])
-            // Censors it in both messages
-            message = message.substring(0, index) + astricks + message.substring(index+filteredWords[i].length)
-            lowercaseMessage = lowercaseMessage.substring(0, index) + astricks + lowercaseMessage.substring(index+filteredWords[i].length)
-            // Adds to our failsafe
-            times += 1
-        }
-    }
-    return message
-}
 //-------------------------------Uploads Messages-------------------------------\\
 function sendMessage(){
     if (inputBox.value != ""){
@@ -131,9 +103,12 @@ function sendMessage(){
             username: username,
             profilepicsrc: String(profilePic),
             message: inputBox.value,
+        }).then(function(){
+            inputBox.value = ""
+            limit.textContent = "0/"+inputBox.maxLength
+        }).catch(function(err){
+            alert("An error has occured. Try again. Error: " + err)
         })
-        inputBox.value = ""
-        limit.textContent = "0/"+inputBox.maxLength
     }
 }
 sendButton.addEventListener("click", sendMessage)
@@ -169,7 +144,7 @@ onChildAdded(ref(db, channel), (data) =>{
      //------------Message------------\\
      let text = document.createElement("p")
      text.classList.add("message")
-     text.textContent = filterMessage(messageContents.message)
+     text.textContent = messageContents.message
      textContainer.appendChild(text)
     //------------Append to messages------------\\
     messageBox.appendChild(element)
